@@ -1,0 +1,31 @@
+{
+  "description": "Loads the owner's reply rules at every session start (and after the context is compacted), and adds a one-line reminder to every message. Silent in a project that carries its own project-os/Conversations.md.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/Inject-reply-rules.mjs", "session"],
+            "timeout": 10,
+            "suppressOutput": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/Inject-reply-rules.mjs", "prompt"],
+            "timeout": 10,
+            "suppressOutput": true
+          }
+        ]
+      }
+    ]
+  }
+}

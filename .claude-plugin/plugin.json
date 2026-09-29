@@ -1,0 +1,6 @@
+{
+  "name": "ai-reply-rules",
+  "version": "1.0.0",
+  "author": { "name": "Rotem Elimelech", "url": "https://rotem-e.com" },
+  "description": "Reply rules that make every answer easy to scan, loaded into each Claude Code session by a hook so they are followed, not just filed. Clone the repo into your personal skills folder once; see README.md."
+}

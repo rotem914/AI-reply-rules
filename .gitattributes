@@ -1,0 +1,4 @@
+# Every file here is text and checks out with LF endings on every machine,
+# whatever the local git setting says: a copy with CRLF endings makes a
+# multi-line edit miss silently.
+* text=auto eol=lf

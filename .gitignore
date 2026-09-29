@@ -1,0 +1,6 @@
+# The owner's own copy of the rules, made at setup. It stays out of git so a
+# `git pull` brings updates to this folder without ever touching it.
+/My-reply-rules.md
+
+# The test suite's scratch folder; it deletes it, but a killed run leaves it.
+/tests/.tmp/
