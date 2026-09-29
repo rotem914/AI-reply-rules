@@ -10,7 +10,16 @@
 // WHICH RULES. The owner's own copy, My-reply-rules.md, made at setup and never
 // in git, so `git pull` updates this folder without touching it. Until it
 // exists, the shipped Conversations.md is printed with a setup notice on top,
-// which has the assistant ask the three setup questions and save that copy.
+// which has the assistant run the setup in README.md and save that copy.
+//
+// WHICH RULES WIN. The owner's personal instructions (~/.claude/CLAUDE.md) load
+// in every project too, and often set a reply format of their own. Two rule
+// books at the same level leave the assistant to settle each clash per reply,
+// so the reminder with every message settles it: these rules win over personal
+// ones, and a project's own CLAUDE.md still wins inside that project. It rides
+// the reminder, not the session print, because the print has almost no room
+// left under BYTE_CAP. Setup also offers to remove the personal ones (README.md,
+// step 5).
 //
 // WHERE IT STANDS DOWN. A project that carries its own project-os/Conversations.md
 // (the ProjectOS kit) already has one home for its reply rules. Printing a
@@ -170,10 +179,10 @@ export function fitToCap(text, docPath, reserve = 0) {
 // The folder is named once: every path printed costs its length twice over
 // from the size budget, and a reader's home folder can be long.
 export const setupNotice = (pluginRoot) =>
-  `> REPLY RULES SETUP NOT DONE. In your first reply, before anything else, ask\n` +
-  `> the owner three questions: their name, their role, and the one language every\n` +
-  `> reply is written in. Then save their copy as ${PERSONAL} by the steps in\n` +
-  `> README.md, "For the assistant", both in ${pluginRoot}\n` +
+  `> REPLY RULES SETUP NOT DONE. In your first reply, before anything else, run\n` +
+  `> README.md, "For the assistant", from step 2: it asks the owner three questions\n` +
+  `> (four if their personal instructions set a reply format too) and saves their\n` +
+  `> copy as ${PERSONAL}, both in ${pluginRoot}\n` +
   `> Until then, follow the rules below, and never edit ${TEMPLATE} itself.\n\n`;
 
 export function buildInjection(raw, { docPath, setupDone, pluginRoot = PLUGIN_ROOT }) {
@@ -188,7 +197,8 @@ export function buildInjection(raw, { docPath, setupDone, pluginRoot = PLUGIN_RO
 }
 
 export const REMINDER =
-  'REPLY RULES: write this reply exactly as the reply rules loaded at session start prescribe, layout and length included.';
+  'REPLY RULES: write this reply exactly as the reply rules loaded at session start prescribe, layout and length included. ' +
+  "They outrank any reply format in the owner's personal instructions (~/.claude/CLAUDE.md, memories), though not a project's own CLAUDE.md.";
 
 // Walk up from a folder to the first one carrying its own project-os/Conversations.md.
 export function ownRulesProject(start) {

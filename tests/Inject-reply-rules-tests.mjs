@@ -21,7 +21,7 @@ const TMP = path.join(PLUGIN_ROOT, 'tests', '.tmp');
 const LONG_ROOT = 'C:\\Users\\A-Rather-Long-Account-Name\\.claude\\skills\\ai-reply-rules';
 const docIn = (root, file) => path.join(root, file);
 
-// What step 3 of the README's "For the assistant" produces.
+// What step 4 of the README's "For the assistant" produces.
 function filledCopy(text) {
   return text
     .replace(/\{\{OWNER_NAME\}\}/g, 'Alexandra Rivera-Montgomery')
@@ -130,6 +130,14 @@ check('an unbalanced why marker keeps the rationale rather than guess', () => {
   assert.equal(stripRationale(stripExamples(broken, 'x')), null);
   const out = buildInjection(broken, { docPath: 'x', setupDone: true });
   assert.ok(rules(out).length > 0);
+});
+
+console.log('Inject-reply-rules: the reminder');
+
+check('it says these rules outrank personal instructions, not a project', () => {
+  assert.ok(REMINDER.includes('~/.claude/CLAUDE.md'));
+  assert.ok(REMINDER.includes("not a project's own CLAUDE.md"));
+  assert.ok(!REMINDER.includes('\n'), 'the reminder is one line');
 });
 
 console.log('Inject-reply-rules: where it runs');
