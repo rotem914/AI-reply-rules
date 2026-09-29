@@ -18,8 +18,9 @@
 // so the reminder with every message settles it: these rules win over personal
 // ones, and a project's own CLAUDE.md still wins inside that project. It rides
 // the reminder, not the session print, because the print has almost no room
-// left under BYTE_CAP. Setup also offers to remove the personal ones (README.md,
-// step 5).
+// left under BYTE_CAP. Setup never edits the personal file itself: it governs
+// every session and every project (owner decision, 2026-09-29, after a setup
+// step that offered to trim it did so on his real machine).
 //
 // WHERE IT STANDS DOWN. A project that carries its own project-os/Conversations.md
 // (the ProjectOS kit) already has one home for its reply rules. Printing a
@@ -181,8 +182,7 @@ export function fitToCap(text, docPath, reserve = 0) {
 export const setupNotice = (pluginRoot) =>
   `> REPLY RULES SETUP NOT DONE. In your first reply, before anything else, run\n` +
   `> README.md, "For the assistant", from step 2: it asks the owner three questions\n` +
-  `> (four if their personal instructions set a reply format too) and saves their\n` +
-  `> copy as ${PERSONAL}, both in ${pluginRoot}\n` +
+  `> and saves their copy as ${PERSONAL}, both in ${pluginRoot}\n` +
   `> Until then, follow the rules below, and never edit ${TEMPLATE} itself.\n\n`;
 
 export function buildInjection(raw, { docPath, setupDone, pluginRoot = PLUGIN_ROOT }) {

@@ -3,8 +3,7 @@
 Seventeen rules that make an AI assistant's replies easy to read: short, one
 sentence per line, clear headings, the question last.
 
-**See exactly what the rules are, with a live example of each, in the article
-[Teach your AI to be easy to read](https://rotem-e.com/knowledge-base/teach-your-ai-to-be-easy-to-read).**
+View the full rules and examples here: [Teach your AI to be easy to read](https://rotem-e.com/knowledge-base/teach-your-ai-to-be-easy-to-read).
 
 A rules file on its own is not enough. An assistant opens it only when something
 tells it to, and a long session drifts away from it. This repo is a Claude Code
@@ -14,8 +13,7 @@ with every message.
 ## Install
 
 The easy way: give Claude Code the link to this page and say **install**. It runs
-the command below, asks you three questions, and that's it. A fourth comes only
-when your personal instructions already set how replies look (see below).
+the command below, asks you three questions, and that's it.
 
 Or run the command yourself, once per computer. It works in Windows PowerShell,
 in a macOS or Linux terminal, and in Claude Code's chat box with `!` in front
@@ -41,18 +39,13 @@ language you want replies in, and saves your own copy of the rules.
 ## If you already have reply rules
 
 Your personal instructions file, `~/.claude/CLAUDE.md`, loads in every session
-too. If it also says how replies should look, the assistant gets two rule books
-that disagree, and settles the clash differently from one reply to the next.
-
-So setup looks there first. If it finds rules about reply format, it asks
-whether to remove them from that file. Say yes, and it saves a copy of the whole
-file beside it as `CLAUDE.md.before-reply-rules`, removes only the reply-format
-rules, and leaves everything else as it was. A preference of yours that these
-rules don't cover, and don't contradict, moves into your copy of the rules.
-
-Say no, and nothing in that file changes. These rules still win where the two
+too. If it also says how replies should look, these rules win where the two
 differ, since the reminder with every message says so. A project's own
 `CLAUDE.md` still wins inside that project.
+
+Setup never changes your personal instructions file, or any file outside the
+plugin folder. If you want a single rule book, remove the reply rules from that
+file yourself.
 
 ## Change a rule
 
@@ -83,9 +76,6 @@ and carry the changes over.
 
 Delete the folder `~/.claude/skills/ai-reply-rules`.
 
-If setup removed rules from your `~/.claude/CLAUDE.md`, they are still in
-`~/.claude/CLAUDE.md.before-reply-rules`. Copy back the ones you want.
-
 ## Codex and other assistants
 
 The hook works in Claude Code only. Anywhere else, paste your copy into the file
@@ -96,23 +86,20 @@ that assistant reads at the start of every session (for Codex, `AGENTS.md`).
 Follow these steps when the owner gives you this link and says install, or when
 the session-start notice says the reply rules setup is not done.
 
+**Setup changes nothing outside the plugin folder.** Never edit, move or trim
+`~/.claude/CLAUDE.md`, a memory file, or any project file, even when the reply
+rules in it clash with these, and never offer to. Those files govern every
+session and every project; the reminder with each message already settles the
+clash.
+
 1. **Clone.** Run the command under Install. If the folder is already there, run
    the command under Update instead. If your environment refuses the command,
    give it to the owner to run in the chat box with `!` in front.
-2. **Look for a second rule book.** Read `~/.claude/CLAUDE.md` and any file it
-   pulls in with `@`. Note every rule about how a reply looks: length, layout,
-   headings, report sections, diagrams, tone, dashes, reply language. Pronouns,
-   working habits and anything else not about a reply's look are not reply
-   rules. No file, or none found: skip the fourth question below and step 5.
-3. **Ask the questions, in one message** (through the question panel if you
+2. **Ask three questions, in one message** (through the question panel if you
    have one): the owner's name; their role, in their own words; and the one
-   language every reply is written in. For the language, offer first the one
-   their personal instructions name, if any, else the one they have been
-   writing in; also offer English. Only when step 2 found reply rules, add a
-   fourth: "Your personal instructions also set how replies look. Remove those
-   rules from that file, so these are the only ones?" Offer "Remove them
-   (recommended), a copy of the file is kept" and "Keep the file as it is".
-4. **Make their copy.** Copy `Conversations.md` in the plugin folder to
+   language every reply is written in. For the language, offer the one they
+   have been writing in, and English.
+3. **Make their copy.** Copy `Conversations.md` in the plugin folder to
    `My-reply-rules.md` in the same folder. In the copy:
    - replace `{{OWNER_NAME}}` with their name and `{{OWNER_ROLE}}` with their
      role, worded to read right after "is a" (`product designer`, not
@@ -131,18 +118,8 @@ the session-start notice says the reply rules setup is not done.
    From then on, every change to the rules, including a lesson rule 16 tells you
    to add, goes into `My-reply-rules.md`. Never edit `Conversations.md`: it is
    the shipped file, and an edit there makes the next update fail.
-5. **Retire the other rules**, only when the owner said remove. First copy
-   `~/.claude/CLAUDE.md` to `~/.claude/CLAUDE.md.before-reply-rules`, whole and
-   unchanged; if that copy fails, stop and change nothing. Then delete from
-   `CLAUDE.md` only the rules step 2 noted, and a heading left with nothing
-   under it. Every other line stays word for word. A file pulled in with `@`
-   is edited the same way, with its own copy beside it. A noted rule that no
-   rule here covers or contradicts moves into `My-reply-rules.md`, as one line
-   in the rule it belongs to. Keep a list of what moved, and of what was
-   dropped because a rule here contradicts it.
-6. **Tell the owner** the rules load from the next session, so they should start
+4. **Tell the owner** the rules load from the next session, so they should start
    a new one. Mention once that the words `full report` lift the length limit
-   for a single reply (rule 1). If step 5 ran, name what moved and what was
-   dropped, one line each, and where the copy of their file is.
+   for a single reply (rule 1).
 
 By [Rotem Elimelech](https://rotem-e.com)
